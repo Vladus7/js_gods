@@ -1,0 +1,21 @@
+<p>films-list works!</p>
+<div class="films__list" *ngIf="isFilmsLoaded;else loading" class="index-page">
+  <mat-grid-list cols="3">
+    <ng-container *ngFor="let film of films">
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-title >{{film.title}}</mat-card-title>
+          <mat-card-subtitle>{{film.release_date}}</mat-card-subtitle>
+          <mat-card-content>{{film.opening_crawl}}</mat-card-content>
+          <mat-card-footer>
+            <button mat-raised-button color="warn" class="film__list__action__button" >
+              <mat-icon aria-hidden="false" color="warn">star_rate</mat-icon>
+            </button>
+            <button mat-stroked-button color="warn">Characters</button>
+          </mat-card-footer>
+        </mat-card>
+      </mat-grid-tile>
+    </ng-container>
+  </mat-grid-list>
+</div>
+<ng-template  #loading><mat-spinner></mat-spinner></ng-template>

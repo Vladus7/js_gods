@@ -1,0 +1,13 @@
+.mat-card-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-card-content{
+  margin-bottom: 0;
+}
+
+.film__list__action__button{
+  border: black;
+}
