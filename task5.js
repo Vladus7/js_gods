@@ -7,20 +7,20 @@ log1000(2);
 log1000(3);
 
 function throttle(func, time) {
-    const throttle_odj = {
-        breaker: true,
-        text: "",
-        process: function (string) {
-            this.text = string;
-            if (this.breaker) {
-                this.breaker = false;
-                func(this.text);
-                setTimeout(() => {
-                    this.breaker = true;
-                    func(this.text);
-                }, time);
-            }
+    let breaker = true;
+    let buffer = "";
+    return string => {
+        buffer = string;
+        if (breaker) {
+            breaker = false;
+            func(buffer);
+            buffer = "";
+            setTimeout(() => {
+                breaker = true;
+                if (buffer !== "") {
+                    func(buffer);
+                }
+            }, time);
         }
     }
-    return throttle_odj.process.bind(throttle_odj);
 }
