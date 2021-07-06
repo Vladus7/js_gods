@@ -1,21 +1,34 @@
-<p>films-list works!</p>
+<div class="film__list__search">
+  <mat-form-field class="input__film__list__search" color="warn" appearance="outline">
+    <mat-label>
+      <mat-icon aria-hidden="false">search</mat-icon>
+      Search
+    </mat-label>
+    <input matInput type="text" (change)="find($event.target)"/>
+  </mat-form-field>
+</div>
 <div class="films__list" *ngIf="isFilmsLoaded;else loading" class="index-page">
   <mat-grid-list cols="3">
     <ng-container *ngFor="let film of films">
       <mat-grid-tile>
-        <mat-card>
-          <mat-card-title >{{film.title}}</mat-card-title>
-          <mat-card-subtitle>{{film.release_date}}</mat-card-subtitle>
+        <mat-card style="height: 340px">
+          <mat-card-title style="text-align: center;">{{film.title}}</mat-card-title>
+          <mat-card-subtitle style="text-align: center;">{{film.release_date}}</mat-card-subtitle>
           <mat-card-content>{{film.opening_crawl}}</mat-card-content>
           <mat-card-footer>
-            <button mat-raised-button color="warn" class="film__list__action__button" >
-              <mat-icon aria-hidden="false" color="warn">star_rate</mat-icon>
+            <button mat-raised-button color="warn" class="film__list__action__button">
+              <mat-icon aria-hidden="false">star_rate</mat-icon>
             </button>
-            <button mat-stroked-button color="warn">Characters</button>
+            <button mat-raised-button color="warn">Characters</button>
           </mat-card-footer>
         </mat-card>
       </mat-grid-tile>
     </ng-container>
   </mat-grid-list>
 </div>
-<ng-template  #loading><mat-spinner></mat-spinner></ng-template>
+<ng-template #loading>
+  <mat-spinner color="warn"></mat-spinner>
+</ng-template>
+<div class="films__list__not_found" *ngIf="films.length === 0 && isFilmsLoaded" class="index-page">
+  <h1 class = "sorry__massage">Sorry :(</h1>
+</div>

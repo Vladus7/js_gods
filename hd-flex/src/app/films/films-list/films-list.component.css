@@ -1,7 +1,32 @@
+.film__list__search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input__film__list__search {
+  margin-top: 5%;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: red;
+}
+
+input.mat-input-element {
+  color: red;
+}
+
 .mat-card-footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  padding-left: 16px;
+  padding-right: 16px;
+  bottom: 20px;
 }
 
 .mat-card-content{
@@ -10,4 +35,21 @@
 
 .film__list__action__button{
   border: black;
+}
+
+mat-spinner {
+  margin-top: 10%;
+  margin-left: 47%;
+}
+
+.films__list__not_found{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sorry__massage{
+  margin-top: 10%;
+  margin-left: 47%;
+  color: red;
 }
