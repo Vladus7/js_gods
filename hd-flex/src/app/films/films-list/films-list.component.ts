@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Film} from "../../models/Film";
 import {FilmService} from "../../services/film.service";
 
@@ -8,9 +8,9 @@ import {FilmService} from "../../services/film.service";
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-
   films: Film[] = [];
   isFilmsLoaded = false;
+  watchFilms: number[] = [];
 
   constructor(
     private filmService: FilmService
@@ -34,9 +34,23 @@ export class FilmsListComponent implements OnInit {
           return word.value.trim().toLowerCase()
             .split(" ").some(
               (r: string) => film.title.toLowerCase().indexOf(r) >= 0);
-        })
+        });
         this.isFilmsLoaded = true;
       });
     console.log(this.films);
+  }
+
+  show(episode_id: number) {
+    this.addFilmInShowedArray(episode_id);
+  }
+
+  addFilmInShowedArray(id: number) {
+    if(!this.hasFilmViewed(id)){
+      this.watchFilms.push(id);
+    }
+  }
+
+  hasFilmViewed(id: number) {
+    return this.watchFilms.find(film => film === id);
   }
 }

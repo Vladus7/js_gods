@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.mat-card{
+  height: 340px;
+}
+
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: red;
 }
@@ -52,4 +56,15 @@ mat-spinner {
   margin-top: 10%;
   margin-left: 47%;
   color: red;
+}
+
+.film__list__star__action__button{
+  left: 0;
+  position: absolute;
+  margin-left: 16px;
+}
+
+.mat-card-footer{
+ display: flex;
+  justify-content: flex-end;
 }

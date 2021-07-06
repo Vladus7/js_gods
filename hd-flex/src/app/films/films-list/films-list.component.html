@@ -11,12 +11,13 @@
   <mat-grid-list cols="3">
     <ng-container *ngFor="let film of films">
       <mat-grid-tile>
-        <mat-card style="height: 340px">
+          <mat-card [appHighlight]="'#FF9188'" (click)="show(film.episode_id)">
           <mat-card-title style="text-align: center;">{{film.title}}</mat-card-title>
           <mat-card-subtitle style="text-align: center;">{{film.release_date}}</mat-card-subtitle>
-          <mat-card-content>{{film.opening_crawl}}</mat-card-content>
+          <mat-card-content >{{film.opening_crawl}}</mat-card-content>
           <mat-card-footer>
-            <button mat-raised-button color="warn" class="film__list__action__button">
+            <button *ngIf="hasFilmViewed(film.episode_id)" mat-raised-button color="warn"
+                    class="film__list__action__button film__list__star__action__button">
               <mat-icon aria-hidden="false">star_rate</mat-icon>
             </button>
             <button mat-raised-button color="warn">Characters</button>
