@@ -9,6 +9,7 @@ import {FilmService} from "../../services/film.service";
 })
 export class FilmsListComponent implements OnInit {
   films: Film[] = [];
+  hashFilms: Film[] = [];
   isFilmsLoaded = false;
   watchFilms: number[] = [];
 
@@ -20,24 +21,20 @@ export class FilmsListComponent implements OnInit {
   ngOnInit(): void {
     this.filmService.getFilms()
       .subscribe(data => {
-        this.films = data.results;
+        this.hashFilms = data.results;
         this.isFilmsLoaded = true;
+        this.films = this.hashFilms;
       });
   }
 
   find(word: any): void {
     this.isFilmsLoaded = false;
-    console.log(word.value);
-    this.filmService.getFilms()
-      .subscribe(data => {
-        this.films = data.results.filter((film: Film) => {
-          return word.value.trim().toLowerCase()
-            .split(" ").some(
-              (r: string) => film.title.toLowerCase().indexOf(r) >= 0);
-        });
-        this.isFilmsLoaded = true;
-      });
-    console.log(this.films);
+    this.films = this.hashFilms.filter((film: Film) => {
+      return word.value.trim().toLowerCase()
+        .split(" ").some(
+          (r: string) => film.title.toLowerCase().indexOf(r) >= 0);
+    });
+    this.isFilmsLoaded = true;
   }
 
   show(episode_id: number) {
@@ -45,7 +42,7 @@ export class FilmsListComponent implements OnInit {
   }
 
   addFilmInShowedArray(id: number) {
-    if(!this.hasFilmViewed(id)){
+    if (!this.hasFilmViewed(id)) {
       this.watchFilms.push(id);
     }
   }
