@@ -20,7 +20,7 @@
                     class="film__list__action__button film__list__star__action__button">
               <mat-icon aria-hidden="false">star_rate</mat-icon>
             </button>
-            <button mat-raised-button color="warn">Characters</button>
+            <button mat-raised-button color="warn" (click)="details(film.episode_id)">Details</button>
           </mat-card-footer>
         </mat-card>
       </mat-grid-tile>
