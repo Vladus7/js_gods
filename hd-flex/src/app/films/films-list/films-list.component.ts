@@ -1,6 +1,8 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Film} from "../../models/Film";
 import {FilmService} from "../../services/film.service";
+import {Router} from "@angular/router";
+import {FilmStorageService} from "../../services/film-storage.service";
 
 @Component({
   selector: 'app-films-list',
@@ -9,45 +11,39 @@ import {FilmService} from "../../services/film.service";
 })
 export class FilmsListComponent implements OnInit {
   films: Film[] = [];
-  hashFilms: Film[] = [];
-  isFilmsLoaded = false;
-  watchFilms: number[] = [];
+  isFilmsLoaded: boolean = false;
 
   constructor(
-    private filmService: FilmService
+    private filmService: FilmService,
+    private filmStorageService: FilmStorageService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.filmService.getFilms()
       .subscribe(data => {
-        this.hashFilms = data.results;
+        this.films = data.results;
+        this.filmStorageService.setAllFilms(this.films);
         this.isFilmsLoaded = true;
-        this.films = this.hashFilms;
       });
   }
 
   find(word: any): void {
     this.isFilmsLoaded = false;
-    this.films = this.hashFilms.filter((film: Film) => {
-      return word.value.trim().toLowerCase()
-        .split(" ").some(
-          (r: string) => film.title.toLowerCase().indexOf(r) >= 0);
-    });
+    this.films = this.filmStorageService.searchFilms(word.value);
     this.isFilmsLoaded = true;
   }
 
   show(episode_id: number) {
-    this.addFilmInShowedArray(episode_id);
-  }
-
-  addFilmInShowedArray(id: number) {
-    if (!this.hasFilmViewed(id)) {
-      this.watchFilms.push(id);
-    }
+    this.filmStorageService.addFilmInShowedArray(episode_id);
   }
 
   hasFilmViewed(id: number) {
-    return this.watchFilms.find(film => film === id);
+    return this.filmStorageService.hasFilmViewed(id);
+  }
+
+  details(episode_id: number) {
+    this.router.navigate(['/films/' + episode_id]);
   }
 }

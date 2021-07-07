@@ -1,0 +1,12 @@
+<div *ngIf="isFilmLoaded;else loading">
+  <mat-card>
+    <mat-card-title style="text-align: center;">{{film.title}}</mat-card-title>
+    <mat-card-subtitle>Release date: {{film.release_date}}</mat-card-subtitle>
+    <mat-card-subtitle>Director: {{film.director}}</mat-card-subtitle>
+    <mat-card-subtitle>Producer: {{film.producer}}</mat-card-subtitle>
+    <mat-card-content>{{film.opening_crawl}}</mat-card-content>
+  </mat-card>
+</div>
+<ng-template #loading>
+  <mat-spinner color="warn"></mat-spinner>
+</ng-template>
