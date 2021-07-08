@@ -6,6 +6,7 @@ import {Film} from "../models/Film";
 })
 export class FilmStorageService {
   private film: Film;
+  private id: number;
 
   constructor(
     ) {
@@ -18,5 +19,13 @@ export class FilmStorageService {
 
   setFilm(film: Film): void {
    this.film = film;
+  }
+
+  getId(): number{
+    return this.id;
+  }
+
+  setId(id: number): void {
+    this.id = id;
   }
 }
