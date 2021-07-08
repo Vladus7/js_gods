@@ -1,0 +1,17 @@
+mat-spinner {
+  margin-top: 10%;
+  margin-left: 47%;
+}
+
+.film__size__button {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+.mat-icon {
+  size: 50px;
+  font-size: 50px;
+}
