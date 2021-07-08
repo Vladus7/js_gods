@@ -5,34 +5,18 @@ import {Film} from "../models/Film";
   providedIn: 'root'
 })
 export class FilmStorageService {
-  private films: Film[] = [];
-  private watchFilms: number[] = [];
-  private foundedFilms: Film[] = [];
+  private film: Film;
 
   constructor(
-  ) {
+    ) {
+    console.log("FilmStorageService is created");
   }
 
-  setAllFilms(films: Film[]) {
-    this.films = films;
+  getFilm(): Film{
+    return this.film;
   }
 
-  searchFilms(request: String): Film[] {
-    this.foundedFilms = this.films.filter((film: Film) => {
-      return request.trim().toLowerCase()
-        .split(" ").some(
-          (r: string) => film.title.toLowerCase().indexOf(r) >= 0);
-    });
-    return this.foundedFilms;
-  }
-
-  addFilmInShowedArray(id: number) {
-    if (!this.hasFilmViewed(id)) {
-      this.watchFilms.push(id);
-    }
-  }
-
-  hasFilmViewed(id: number) {
-    return this.watchFilms.find(film => film === id);
+  setFilm(film: Film): void {
+   this.film = film;
   }
 }

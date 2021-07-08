@@ -11,6 +11,7 @@
   <mat-grid-list cols="3">
     <ng-container *ngFor="let film of films">
       <mat-grid-tile>
+        {{film.episode_id}}
           <mat-card [appHighlight]="'#FF9188'" (click)="show(film.episode_id)">
           <mat-card-title style="text-align: center;">{{film.title}}</mat-card-title>
           <mat-card-subtitle style="text-align: center;">{{film.release_date}}</mat-card-subtitle>

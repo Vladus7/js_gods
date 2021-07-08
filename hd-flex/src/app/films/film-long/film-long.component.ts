@@ -24,19 +24,19 @@ export class FilmLongComponent implements OnInit {
 
   ngOnInit(): void {
     this.film = this.filmStorageService.getFilm();
-    if (this.film === undefined) {
-      this.route.params.subscribe(params => {
-        this.film_id = params['episode_id'];
+    this.route.params.subscribe(params => {
+      this.film_id = params['episode_id'];
+      if (this.film === undefined || this.film.episode_id !== this.film_id) {
         this.filmService.getFilmById(this.film_id).subscribe(data => {
           this.film = data;
           this.isFilmLoaded = true;
           this.filmStorageService.setFilm(this.film);
         });
-      });
-    } else {
-      this.isFilmLoaded = true;
-      this.film_id = this.film.episode_id
-    }
+      } else {
+        this.isFilmLoaded = true;
+        this.film_id = this.film.episode_id
+      }
+    });
   }
 
   short() {
