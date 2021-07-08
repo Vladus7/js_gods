@@ -17,6 +17,7 @@ export class TextTrimmerComponent implements OnInit {
   ngOnInit(): void {
     if (this.text.length <= 100) {
       this.isTextSoSmall = true;
+      return;
     }
     this.massage = this.text.substring(0, 100);
   }
