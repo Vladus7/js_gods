@@ -1,0 +1,8 @@
+.text__trimmer__button {
+  color: red;
+}
+
+.text__trimmer {
+  display: flex;
+  flex-direction: row;
+}

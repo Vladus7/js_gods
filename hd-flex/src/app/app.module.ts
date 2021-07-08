@@ -19,6 +19,7 @@ import {FilmShortComponent} from './films/film-short/film-short.component';
 import {FilmLongComponent} from './films/film-long/film-long.component';
 import {FilmStorageService} from "./services/film-storage.service";
 import {GreetingModule} from "./greeting/greeting.module";
+import { TextTrimmerComponent } from './layout/text-trimmer/text-trimmer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {GreetingModule} from "./greeting/greeting.module";
     HighlightDirective,
     NavigationComponent,
     FilmShortComponent,
-    FilmLongComponent
+    FilmLongComponent,
+    TextTrimmerComponent
   ],
   imports: [
     BrowserModule,
