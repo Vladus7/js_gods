@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Film} from "../../models/Film";
 import {FilmService} from "../../services/film.service";
 import {Router} from "@angular/router";
-import {FilmStorageService} from "../../services/film-storage.service";
+import {FilmsStorageService} from "../../services/films-storage.service";
 
 @Component({
   selector: 'app-films-list',
@@ -15,7 +15,7 @@ export class FilmsListComponent implements OnInit {
 
   constructor(
     private filmService: FilmService,
-    private filmStorageService: FilmStorageService,
+    private filmStorageService: FilmsStorageService,
     private router: Router
   ) {
   }

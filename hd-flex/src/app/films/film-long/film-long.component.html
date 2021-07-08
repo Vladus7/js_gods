@@ -1,4 +1,9 @@
 <div *ngIf="isFilmLoaded;else loading">
+  <div class="film__size__button" >
+    <mat-icon aria-hidden="false" color="warn" (click)="short()">
+      short_text
+    </mat-icon>
+  </div>
   <mat-card>
     <mat-card-title style="text-align: center;">{{film.title}}</mat-card-title>
     <mat-card-subtitle>Release date: {{film.release_date}}</mat-card-subtitle>
