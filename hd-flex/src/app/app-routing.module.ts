@@ -7,17 +7,13 @@ import {FilmLongComponent} from "./films/film-long/film-long.component";
 const routes: Routes = [
   {path: '', component: FilmsListComponent},
   {
-    path: 'films', children: [
+    path: 'films/:episode_id', children: [
       {
-        path: ':episode_id',
+        path: 'short',
         component: FilmShortComponent,
       },
       {
-        path: 'short/:episode_id',
-        component: FilmShortComponent,
-      },
-      {
-        path: 'full/:episode_id',
+        path: 'full',
         component: FilmLongComponent,
       },
     ],

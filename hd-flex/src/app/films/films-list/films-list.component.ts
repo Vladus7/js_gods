@@ -48,7 +48,7 @@ export class FilmsListComponent implements OnInit {
   }
 
   details(episode_id: number) {
-    this.router.navigate(['/films/' + episode_id]);
+    this.router.navigate(['/films/' + episode_id + '/short']);
   }
 }
 

@@ -37,6 +37,6 @@ export class FilmLongComponent implements OnInit {
   }
 
   short() {
-    this.router.navigate(['/films/' + this.film.id]);
+    this.router.navigate(['/films/' + this.film.id + '/short']);
   }
 }
