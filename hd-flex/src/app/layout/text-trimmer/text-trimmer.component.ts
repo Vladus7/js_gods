@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 
+const SHORT = 'short';
+const LONG = 'long';
+const ALWAYS_SHORT = 'always_short'
+
 @Component({
   selector: 'app-text-trimmer',
   templateUrl: './text-trimmer.component.html',
@@ -9,26 +13,25 @@ export class TextTrimmerComponent implements OnInit {
 
   @Input('text') text: String;
   massage: String;
-  isTextAll = false;
-  isTextSoSmall = false;
+  textType = SHORT;
 
   constructor() { }
 
   ngOnInit(): void {
     if (this.text.length <= 100) {
-      this.isTextSoSmall = true;
+      this.textType = ALWAYS_SHORT;
       return;
     }
     this.massage = this.text.substring(0, 100);
   }
 
-  showLess() {
+  lengthSwitch(): void{
+    if(this.textType === SHORT){
+      this.textType = LONG;
+      this.massage = this.text;
+      return;
+    }
+    this.textType = SHORT;
     this.massage = this.text.substring(0, 100);
-    this.isTextAll = false;
-  }
-
-  showMore() {
-    this.massage = this.text;
-    this.isTextAll = true;
   }
 }

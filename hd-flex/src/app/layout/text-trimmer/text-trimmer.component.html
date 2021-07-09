@@ -1,9 +1,12 @@
-<div *ngIf="!isTextSoSmall; else allText">
-<div class="text__trimmer">
-  {{massage}} <h3 *ngIf="!isTextAll" (click)="showMore()" class="text__trimmer__button">...show more</h3>
+<div *ngIf="textType === 'always_short'; else switchText">
+  <h3>{{massage}}</h3>
 </div>
-<h3 *ngIf="isTextAll" (click)="showLess()" class="text__trimmer__button">show less</h3>
-</div>
-<ng-template #allText>
-  {{massage}}
+<ng-template #switchText>
+  <div class="text__trimmer">
+    <h3>{{massage}}</h3>
+    <h3 *ngIf="textType === 'short'" (click)="lengthSwitch()" class="text__trimmer__button">...show more</h3>
+  </div>
 </ng-template>
+<div>
+  <h3 *ngIf="textType === 'long'" (click)="lengthSwitch()" class="text__trimmer__button">show less</h3>
+</div>

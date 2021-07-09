@@ -8,7 +8,8 @@ import {FilmWithId} from "../../models/FilmWithId";
 @Component({
   selector: 'app-film-long',
   templateUrl: './film-long.component.html',
-  styleUrls: ['./film-long.component.css']
+  styleUrls: ['./film-long.component.css'],
+  providers: []
 })
 export class FilmLongComponent implements OnInit {
   film: FilmWithId;
