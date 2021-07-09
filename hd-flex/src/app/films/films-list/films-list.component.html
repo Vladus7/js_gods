@@ -9,18 +9,18 @@
 </div>
 <div class="films__list" *ngIf="isFilmsLoaded;else loading" class="index-page">
   <mat-grid-list cols="3">
-    <ng-container *ngFor="let film of films; index as i">
+    <ng-container *ngFor="let film of films">
       <mat-grid-tile>
-          <mat-card [appHighlight]="'#FF9188'" (click)="show(i+1)">
+          <mat-card [appHighlight]="'#FF9188'" (click)="show(film.id)">
           <mat-card-title style="text-align: center;">{{film.title}}</mat-card-title>
           <mat-card-subtitle style="text-align: center;">{{film.release_date}}</mat-card-subtitle>
           <mat-card-content >{{film.opening_crawl}}</mat-card-content>
           <mat-card-footer>
-            <button *ngIf="hasFilmViewed(i+1)" mat-raised-button color="warn"
+            <button *ngIf="hasFilmViewed(film.id)" mat-raised-button color="warn"
                     class="film__list__action__button film__list__star__action__button">
               <mat-icon aria-hidden="false">star_rate</mat-icon>
             </button>
-            <button mat-raised-button color="warn" (click)="details(i+1)">Details</button>
+            <button mat-raised-button color="warn" (click)="details(film.id)">Details</button>
           </mat-card-footer>
         </mat-card>
       </mat-grid-tile>

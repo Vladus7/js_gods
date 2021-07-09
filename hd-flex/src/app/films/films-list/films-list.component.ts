@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Film} from "../../models/Film";
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {FilmService} from "../../services/film.service";
 import {Router} from "@angular/router";
 import {FilmsStorageService} from "../../services/films-storage.service";
+import {FilmWithId} from "../../models/FilmWithId";
 
 @Component({
   selector: 'app-films-list',
@@ -10,7 +10,7 @@ import {FilmsStorageService} from "../../services/films-storage.service";
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  films: Film[] = [];
+  films: FilmWithId[] = [];
   isFilmsLoaded: boolean = false;
 
   constructor(
@@ -21,12 +21,16 @@ export class FilmsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filmService.getFilms()
-      .subscribe(data => {
-        this.films = data.results;
-        this.filmStorageService.setAllFilms(this.films);
-        this.isFilmsLoaded = true;
-      });
+    this.films = this.filmStorageService.films;
+    if (this.films.length === 0) {
+      this.filmService.getFilms()
+        .subscribe(data => {
+          this.films = this.filmStorageService.saveAllFilms(data.results);
+          this.isFilmsLoaded = true;
+        });
+    } else {
+      this.isFilmsLoaded = true;
+    }
   }
 
   find(word: any): void {
@@ -47,3 +51,4 @@ export class FilmsListComponent implements OnInit {
     this.router.navigate(['/films/' + episode_id]);
   }
 }
+

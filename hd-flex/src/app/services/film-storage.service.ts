@@ -1,31 +1,22 @@
 import {Injectable} from '@angular/core';
 import {Film} from "../models/Film";
+import {FilmWithId} from "../models/FilmWithId";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmStorageService {
-  private film: Film;
-  private id: number;
+  private film: FilmWithId;
 
-  constructor(
-    ) {
-    console.log("FilmStorageService is created");
+  constructor() {
   }
 
-  getFilm(): Film{
+  getFilm(): FilmWithId {
     return this.film;
   }
 
-  setFilm(film: Film): void {
-   this.film = film;
-  }
-
-  getId(): number{
-    return this.id;
-  }
-
-  setId(id: number): void {
-    this.id = id;
+  saveFilm(film: Film): FilmWithId {
+    this.film = new FilmWithId(film);
+    return this.film;
   }
 }
