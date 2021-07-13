@@ -19,6 +19,7 @@ import {FilmShortComponent} from './films/film-short/film-short.component';
 import {FilmLongComponent} from './films/film-long/film-long.component';
 import {FilmStorageService} from "./services/film-storage.service";
 import { TextTrimmerComponent } from './layout/text-trimmer/text-trimmer.component';
+import { FilmComponent } from './films/film/film.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TextTrimmerComponent } from './layout/text-trimmer/text-trimmer.compone
     NavigationComponent,
     FilmShortComponent,
     FilmLongComponent,
-    TextTrimmerComponent
+    TextTrimmerComponent,
+    FilmComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { TextTrimmerComponent } from './layout/text-trimmer/text-trimmer.compone
     MatToolbarModule,
   ],
   providers: [
-    FilmStorageService,
+    // FilmStorageService,
     ],
   bootstrap: [AppComponent]
 })

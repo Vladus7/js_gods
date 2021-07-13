@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {FilmsListComponent} from "./films/films-list/films-list.component";
 import {FilmShortComponent} from "./films/film-short/film-short.component";
 import {FilmLongComponent} from "./films/film-long/film-long.component";
+import {FilmComponent} from "./films/film/film.component";
 
 const routes: Routes = [
   {path: '', component: FilmsListComponent},
@@ -10,11 +11,13 @@ const routes: Routes = [
     path: 'films/:episode_id', children: [
       {
         path: 'short',
-        component: FilmShortComponent,
+        // component: FilmShortComponent,
+        component: FilmComponent,
       },
       {
         path: 'full',
-        component: FilmLongComponent,
+        // component: FilmLongComponent,
+        component: FilmComponent,
       },
     ],
   }

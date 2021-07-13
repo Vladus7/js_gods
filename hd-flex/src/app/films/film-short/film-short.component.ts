@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Optional, SkipSelf} from '@angular/core';
 import {FilmStorageService} from "../../services/film-storage.service";
 import {FilmService} from "../../services/film.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,15 +7,15 @@ import {FilmWithId} from "../../models/FilmWithId";
 
 @Component({
   selector: 'app-film-short',
-  templateUrl: './film-short.component.html',
-  styleUrls: ['./film-short.component.css']
+  styleUrls: ['./film-short.component.css'],
+  templateUrl: './film-short.component.html'
 })
 export class FilmShortComponent implements OnInit {
   film: FilmWithId;
   isFilmLoaded = false;
 
   constructor(
-    private filmStorageService: FilmStorageService,
+    @Optional() public filmStorageService: FilmStorageService,
     private filmService: FilmService,
     private route: ActivatedRoute,
     private router: Router

@@ -9,6 +9,7 @@ export class FilmStorageService {
   private film: FilmWithId;
 
   constructor() {
+    console.log("FilmStorageService was generated");
   }
 
   getFilm(): FilmWithId {
