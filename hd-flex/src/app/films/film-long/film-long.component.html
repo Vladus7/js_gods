@@ -1,4 +1,4 @@
-<div *ngIf="isFilmLoaded;else loading">
+<div *ngIf="isFilmLoaded && error === undefined;else loading">
   <div class="film__size__button" >
     <mat-icon aria-hidden="false" color="warn" (click)="short()">
       short_text
@@ -9,9 +9,13 @@
     <mat-card-subtitle>Release date: {{film.release_date}}</mat-card-subtitle>
     <mat-card-subtitle>Director: {{film.director}}</mat-card-subtitle>
     <mat-card-subtitle>Producer: {{film.producer}}</mat-card-subtitle>
-    <mat-card-content>{{film.opening_crawl}}</mat-card-content>
+    <mat-card-content><app-text-trimmer [text]="film.opening_crawl"></app-text-trimmer></mat-card-content>
   </mat-card>
+</div>
+<div *ngIf="error !== undefined" class="error">
+  <h1>{{error}}</h1>
 </div>
 <ng-template #loading>
   <mat-spinner color="warn"></mat-spinner>
 </ng-template>
+

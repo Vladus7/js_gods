@@ -18,7 +18,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {FilmShortComponent} from './films/film-short/film-short.component';
 import {FilmLongComponent} from './films/film-long/film-long.component';
 import {FilmStorageService} from "./services/film-storage.service";
-import {GreetingModule} from "./greeting/greeting.module";
+import { TextTrimmerComponent } from './layout/text-trimmer/text-trimmer.component';
+import { FilmComponent } from './films/film/film.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import {GreetingModule} from "./greeting/greeting.module";
     HighlightDirective,
     NavigationComponent,
     FilmShortComponent,
-    FilmLongComponent
+    FilmLongComponent,
+    TextTrimmerComponent,
+    FilmComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +44,9 @@ import {GreetingModule} from "./greeting/greeting.module";
     MatProgressSpinnerModule,
     MatInputModule,
     MatToolbarModule,
-    GreetingModule.forRoot(),
   ],
   providers: [
-    FilmStorageService,
+    // FilmStorageService,
     ],
   bootstrap: [AppComponent]
 })

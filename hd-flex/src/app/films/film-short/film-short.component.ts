@@ -1,23 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {Film} from "../../models/Film";
+import {Component, Input, OnInit, Optional, SkipSelf} from '@angular/core';
 import {FilmStorageService} from "../../services/film-storage.service";
 import {FilmService} from "../../services/film.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FilmLongComponent} from "../film-long/film-long.component";
+import {FilmWithId} from "../../models/FilmWithId";
 
 @Component({
   selector: 'app-film-short',
-  templateUrl: './film-short.component.html',
-  styleUrls: ['./film-short.component.css']
+  styleUrls: ['./film-short.component.css'],
+  templateUrl: './film-short.component.html'
 })
 export class FilmShortComponent implements OnInit {
-  film: Film;
+  film: FilmWithId;
   isFilmLoaded = false;
-  saved_film_id: number;
-  film_id: number;
 
   constructor(
-    private filmStorageService: FilmStorageService,
+    @Optional() public filmStorageService: FilmStorageService,
     private filmService: FilmService,
     private route: ActivatedRoute,
     private router: Router
@@ -26,24 +24,19 @@ export class FilmShortComponent implements OnInit {
 
   ngOnInit(): void {
     this.film = this.filmStorageService.getFilm();
-    this.saved_film_id = this.filmStorageService.getId();
     this.route.params.subscribe(params => {
-      this.film_id = params['episode_id'];
-      if (this.film === undefined || this.saved_film_id !== this.film_id) {
-        this.filmService.getFilmById(this.film_id).subscribe(data => {
-          this.film = data;
+      if (this.film === undefined || this.film.id !== params['episode_id']) {
+        this.filmService.getFilmById(params['episode_id']).subscribe(data => {
           this.isFilmLoaded = true;
-          this.filmStorageService.setFilm(this.film);
-          this.filmStorageService.setId(this.film_id);
+          this.film = this.filmStorageService.saveFilm(data);
         });
       } else {
         this.isFilmLoaded = true;
-        this.film_id = this.saved_film_id;
       }
     });
   }
 
   long() {
-    this.router.navigate(['/films/full/' + this.film_id]);
+    this.router.navigate(['full'], {relativeTo: this.route.parent});
   }
 }

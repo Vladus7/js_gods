@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Optional, SkipSelf} from '@angular/core';
 import {FilmService} from "../../services/film.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Film} from "../../models/Film";
 import {FilmStorageService} from "../../services/film-storage.service";
+import {FilmWithId} from "../../models/FilmWithId";
 
 @Component({
   selector: 'app-film-long',
@@ -10,13 +11,13 @@ import {FilmStorageService} from "../../services/film-storage.service";
   styleUrls: ['./film-long.component.css']
 })
 export class FilmLongComponent implements OnInit {
-  film: Film;
+  film: FilmWithId;
   isFilmLoaded = false;
-  saved_film_id: number;
-  film_id: number;
+  id: number;
+  error: String;
 
   constructor(
-    private filmStorageService: FilmStorageService,
+    @Optional() public filmStorageService: FilmStorageService,
     private filmService: FilmService,
     private route: ActivatedRoute,
     private router: Router
@@ -25,24 +26,28 @@ export class FilmLongComponent implements OnInit {
 
   ngOnInit(): void {
     this.film = this.filmStorageService.getFilm();
-    this.saved_film_id = this.filmStorageService.getId();
-    this.route.params.subscribe(params => {
-      this.film_id = params['episode_id'];
-      if (this.film === undefined || this.saved_film_id !== this.film_id) {
-        this.filmService.getFilmById(this.film_id).subscribe(data => {
-          this.film = data;
-          this.isFilmLoaded = true;
-          this.filmStorageService.setFilm(this.film);
-          this.filmStorageService.setId(this.film_id);
-        });
-      } else {
-        this.isFilmLoaded = true;
-        this.film_id = this.saved_film_id;
-      }
-    });
+    this.id = +this.route.snapshot.params.episode_id;
+    console.log(this.id);
+    if (this.film === undefined || this.film.id !== this.id) {
+      this.loadFilm();
+    } else {
+      this.isFilmLoaded = true;
+    }
   }
 
-  short() {
-    this.router.navigate(['/films/' + this.film_id]);
+  short() : void {
+    this.router.navigate(['short'], {relativeTo: this.route.parent});
+  }
+
+  loadFilm() : void {
+    this.filmService.getFilmById(this.id).subscribe(data => {
+      this.film = this.filmStorageService.saveFilm(data);
+    }, error => {
+      console.log(error);
+      this.isFilmLoaded = true;
+      this.error = "404 Film is undefound";
+    }, () => {
+      this.isFilmLoaded = true;
+    });
   }
 }

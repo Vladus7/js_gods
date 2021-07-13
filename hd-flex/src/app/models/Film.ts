@@ -15,22 +15,22 @@ export interface Film {
   url: String,
 }
 
-interface Characters {
+export interface Characters {
   [index: number]: String;
 }
 
-interface Planets {
+export interface Planets {
   [index: number]: String;
 }
 
-interface Starships {
+export interface Starships {
   [index: number]: String;
 }
 
-interface Vehicles {
+export interface Vehicles {
   [index: number]: String;
 }
 
-interface Species {
+export interface Species {
   [index: number]: String;
 }
